@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>改善客 · 精益主页</title>
+    <style>
+        /* 全局重置 & 字体 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ffffff;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1e1e1e;
+            line-height: 1.5;
+            padding: 20px 16px 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;   /* 舒适阅读宽度，同时适配手机 */
+            width: 100%;
+        }
+
+        /* ----- 头像 & 简介区 ----- */
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 12px;
+            margin-bottom: 24px;
+        }
+
+        .avatar {
+            width: 128px;
+            height: 128px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #990019;    /* 主色边框 */
+            background-color: #f0f0f0;
+            box-shadow: 0 8px 20px rgba(153, 0, 25, 0.12);
+            transition: transform 0.2s ease;
+        }
+
+        .avatar:hover {
+            transform: scale(1.02);
+        }
+
+        .name {
+            margin-top: 16px;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #990019;
+        }
+
+        .bio {
+            margin-top: 6px;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            background: #f8f8f8;
+            padding: 6px 18px;
+            border-radius: 40px;
+            border-left: 4px solid #4DE633;   /* 强调色点缀 */
+            font-weight: 450;
+            text-align: center;
+        }
+
+        /* ----- 链接按钮 (GitHub / 抖音 / 小红书) ----- */
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px 16px;
+            margin: 20px 0 32px;
+        }
+
+        .link-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f2f2f2;
+            padding: 8px 18px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            color: #1e1e1e;
+            border: 1px solid #e0e0e0;
+            transition: all 0.2s;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .link-item i {
+            font-size: 1.1rem;
+        }
+
+        /* 品牌色点缀 (仅图标或文字) */
+        .link-item.github {
+            background: #f0f0f0;
+            border-color: #990019;
+            color: #990019;
+        }
+        .link-item.github:hover {
+            background: #990019;
+            color: white;
+            border-color: #990019;
+        }
+
+        .link-item.douyin {
+            background: #f0f0f0;
+            border-color: #4DE633;
+            color: #1e7a2b;
+        }
+        .link-item.douyin:hover {
+            background: #4DE633;
+            color: #1e1e1e;
+            border-color: #4DE633;
+        }
+
+        .link-item.xiaohongshu {
+            background: #f0f0f0;
+            border-color: #990019;
+            color: #990019;
+        }
+        .link-item.xiaohongshu:hover {
+            background: #990019;
+            color: white;
+            border-color: #990019;
+        }
+
+        /* 简单图标占位 (无需字体库, 用unicode/emoji) */
+        .link-item .icon {
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        /* ----- 导航卡片标题 ----- */
+        .section-title {
+            margin: 36px 0 16px;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #990019;
+            border-bottom: 4px solid #4DE633;
+            padding-bottom: 6px;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        /* 卡片样式 */
+        .tool-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 18px 6px 14px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(153, 0, 25, 0.08);
+            border: 1px solid #f0f0f0;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 90px;
+            color: #1e1e1e;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            cursor: default;   /* 演示无跳转，但保留卡片感 */
+        }
+
+        /* 卡片装饰 – 用伪元素强调主题色 */
+        .tool-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20%;
+            width: 60%;
+            height: 4px;
+            background: #990019;
+            border-radius: 4px 4px 0 0;
+            opacity: 0.3;
+            transition: opacity 0.2s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(153, 0, 25, 0.08), 0 4px 8px rgba(0,0,0,0.02);
+            border-color: #4DE633;
+        }
+
+        .tool-card:hover::after {
+            opacity: 1;
+            background: #4DE633;
+            height: 5px;
+        }
+
+        /* 卡片内图标 (纯字符/emoji) */
+        .tool-icon {
+            font-size: 2rem;
+            line-height: 1.2;
+            margin-bottom: 6px;
+            filter: drop-shadow(0 2px 4px rgba(153,0,25,0.1));
+        }
+
+        .tool-name {
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+            color: #1e1e1e;
+        }
+
+        /* 特殊卡片颜色点缀 (使用主色/辅色) */
+        .tool-card:nth-child(3n+1) .tool-icon {
+            color: #990019;
+        }
+        .tool-card:nth-child(3n+2) .tool-icon {
+            color: #4DE633;
+        }
+        .tool-card:nth-child(3n+3) .tool-icon {
+            color: #990019;
+        }
+
+        /* 底部微标 */
+        .footer-note {
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #888;
+            text-align: center;
+            border-top: 1px solid #eee;
+            padding-top: 24px;
+            width: 100%;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-note span {
+            color: #990019;
+            font-weight: 500;
+        }
+
+        /* ----- 手机优先微调 (宽度小于480px) ----- */
+        @media (max-width: 480px) {
+            body {
+                padding: 16px 12px 30px;
+            }
+            .avatar {
+                width: 108px;
+                height: 108px;
+            }
+            .name {
+                font-size: 1.8rem;
+            }
+            .bio {
+                font-size: 0.95rem;
+                padding: 4px 14px;
+            }
+            .links {
+                gap: 8px 10px;
+            }
+            .link-item {
+                padding: 6px 14px;
+                font-size: 0.85rem;
+            }
+            .tool-grid {
+                gap: 10px;
+            }
+            .tool-card {
+                min-height: 80px;
+                padding: 14px 4px 12px;
+            }
+            .tool-icon {
+                font-size: 1.8rem;
+            }
+            .tool-name {
+                font-size: 0.8rem;
+            }
+            .section-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .tool-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            /* 让卡片更紧凑 */
+            .tool-card {
+                min-height: 72px;
+                padding: 10px 4px;
+            }
+        }
+
+        /* 针对大屏 大于600px 保持居中 */
+        @media (min-width: 640px) {
+            .container {
+                padding: 0 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- 头像 + 简介 -->
+        <div class="profile">
+            <img class="avatar" src="https://avatars.githubusercontent.com/u/82360978" alt="改善客头像" loading="lazy">
+            <div class="name">改善客</div>
+            <div class="bio">精益生产实践者 · 精益数字探索者</div>
+        </div>
+
+        <!-- 社交链接 -->
+        <div class="links">
+            <a href="https://github.com/gaishanke" target="_blank" rel="noopener noreferrer" class="link-item github">
+                <span class="icon">🐙</span> GitHub
+            </a>
+            <a href="https://www.douyin.com/user/MS4wLjABAAAAS1wwOvaUh9d5-0GJHgclC3kRt0hdiJ0w3lbJu4BjpW96VuQyoltyDTYQZ7wxjOgQ" target="_blank" rel="noopener noreferrer" class="link-item douyin">
+                <span class="icon">🎵</span> 抖音
+            </a>
+            <a href="https://www.xiaohongshu.com/user/profile/65b53862000000000e02559f" target="_blank" rel="noopener noreferrer" class="link-item xiaohongshu">
+                <span class="icon">📕</span> 小红书
+            </a>
+        </div>
+
+        <!-- 工具导航卡片 标题 -->
+        <div style="display: flex; justify-content: flex-start; width: 100%;">
+            <span class="section-title">🛠️ 工具箱</span>
+        </div>
+
+        <!-- 卡片网格 9个工具 -->
+        <div class="tool-grid">
+            <!-- 1. 价值流图 -->
+            <div class="tool-card">
+                <span class="tool-icon">🗺️</span>
+                <span class="tool-name">价值流图</span>
+            </div>
+            <!-- 2. 看板 -->
+            <div class="tool-card">
+                <span class="tool-icon">📋</span>
+                <span class="tool-name">看板</span>
+            </div>
+            <!-- 3. A3报告 -->
+            <div class="tool-card">
+                <span class="tool-icon">📄</span>
+                <span class="tool-name">A3报告</span>
+            </div>
+            <!-- 4. OEE计算 -->
+            <div class="tool-card">
+                <span class="tool-icon">⚙️</span>
+                <span class="tool-name">OEE计算</span>
+            </div>
+            <!-- 5. 5S检查表 -->
+            <div class="tool-card">
+                <span class="tool-icon">✅</span>
+                <span class="tool-name">5S检查表</span>
+            </div>
+            <!-- 6. 现场管理 -->
+            <div class="tool-card">
+                <span class="tool-icon">🏭</span>
+                <span class="tool-name">现场管理</span>
+            </div>
+            <!-- 7. PDCA循环 -->
+            <div class="tool-card">
+                <span class="tool-icon">🔄</span>
+                <span class="tool-name">PDCA循环</span>
+            </div>
+            <!-- 8. 标准作业 -->
+            <div class="tool-card">
+                <span class="tool-icon">📐</span>
+                <span class="tool-name">标准作业</span>
+            </div>
+            <!-- 9. 额外占位 – 保持网格完整，同时也可以作为“更多” 但按照要求是8个工具，但列表有8个，我加上一个“改善” 但实际是8个？ 要求：价值流图、看板、A3报告、OEE计算、5S检查表、现场管理、PDCA循环、标准作业 正好8个。 为了美观网格3列，8个会留空，可以加一个占位或让网格自适应，但为了视觉统一，补充一个“精益工具”或留空。 这里用“更多”占位，保持3列整齐，同时不影响设计 -->
+            <div class="tool-card" style="background: #fafafa; border-style: dashed; border-color: #ccc;">
+                <span class="tool-icon">🧩</span>
+                <span class="tool-name">更多工具</span>
+            </div>
+        </div>
+
+        <!-- 底部信息 (轻量) -->
+        <div class="footer-note">
+            <span>改善客</span> · 精益生产 · 数字探索 <span style="color:#4DE633;">✦</span>
+        </div>
+
+    </div>
+    <!-- 无额外脚本，纯静态 -->
+</body>
+</html>

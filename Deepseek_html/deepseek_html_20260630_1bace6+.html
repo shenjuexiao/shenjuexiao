@@ -1,0 +1,398 @@
+<!-- https://chat.deepseek.com/a/chat/s/877dc465-26c8-43cb-9075-bb8a3a77bcf2 -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>改善客 · 精益生产</title>
+  <style>
+    /* 全局重置 & 字体 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #ffffff;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e1e1e;
+      line-height: 1.5;
+      padding: 1.5rem 1rem 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* 主容器 — 最大宽度适配手机 & 桌面 */
+    .container {
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* ----- 主题色变量 ( #990019 , #4DE633 ) ----- */
+    .accent-primary {
+      color: #990019;
+    }
+    .accent-secondary {
+      color: #4DE633;
+    }
+    .border-primary {
+      border-color: #990019;
+    }
+    .bg-primary-soft {
+      background-color: rgba(153, 0, 25, 0.04);
+    }
+    .bg-secondary-soft {
+      background-color: rgba(77, 230, 51, 0.08);
+    }
+
+    /* ----- 卡片通用设计 ----- */
+    .card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 1.5rem 1.25rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(153, 0, 25, 0.03);
+      border: 1px solid rgba(153, 0, 25, 0.06);
+      transition: box-shadow 0.2s ease;
+      margin-bottom: 1.75rem;
+    }
+
+    .card:hover {
+      box-shadow: 0 12px 32px rgba(153, 0, 25, 0.07);
+    }
+
+    /* ----- 头像 + 简介区域 ----- */
+    .profile-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1.5rem 1.8rem;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #990019;
+      box-shadow: 0 8px 20px rgba(153, 0, 25, 0.15);
+      margin-bottom: 1.2rem;
+      background: #f5f5f5; /* 加载占位 */
+      transition: transform 0.25s ease;
+    }
+
+    .avatar:hover {
+      transform: scale(1.02);
+    }
+
+    .name {
+      font-size: 1.9rem;
+      font-weight: 650;
+      letter-spacing: -0.5px;
+      color: #111;
+      margin-bottom: 0.3rem;
+    }
+
+    .name span {
+      color: #990019;
+    }
+
+    .bio {
+      font-size: 1.1rem;
+      color: #2d2d2d;
+      background: rgba(77, 230, 51, 0.12);
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      display: inline-block;
+      margin-top: 0.2rem;
+      font-weight: 470;
+      backdrop-filter: blur(2px);
+      border: 1px solid rgba(77, 230, 51, 0.15);
+    }
+
+    /* ----- 社交链接 (图标 + 文字) ----- */
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem 1.2rem;
+      margin-top: 1.5rem;
+      padding-top: 0.5rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 1rem 0.45rem 0.9rem;
+      background: #f8f8f8;
+      border-radius: 60px;
+      text-decoration: none;
+      color: #1a1a1a;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border: 1px solid #eaeaea;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+    }
+
+    .social-link i {
+      font-size: 1.25rem;
+      line-height: 1;
+      color: #990019;
+    }
+
+    .social-link:hover {
+      background: #ffffff;
+      border-color: #990019;
+      box-shadow: 0 4px 12px rgba(153, 0, 25, 0.10);
+      transform: translateY(-2px);
+    }
+
+    /* 特殊抖音/小红书微调 */
+    .social-link .icon-douyin { color: #000; } 
+    .social-link .icon-xiaohongshu { color: #ff2442; }
+
+    /* 工具导航卡片 — 网格 */
+    .tools-section {
+      margin-top: 0.5rem;
+    }
+
+    .tools-section h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #111;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.3px;
+    }
+
+    .tools-section h2::after {
+      content: "🛠️";
+      font-size: 1.3rem;
+      opacity: 0.8;
+      margin-left: auto;
+      background: rgba(77, 230, 51, 0.15);
+      padding: 0.1rem 0.7rem;
+      border-radius: 40px;
+      font-size: 1rem;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .tool-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #fafafa;
+      border-radius: 20px;
+      padding: 1rem 0.5rem;
+      text-align: center;
+      border: 1px solid #eeeeee;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: #1a1a1a;
+      font-weight: 500;
+      font-size: 0.95rem;
+      min-height: 80px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+      position: relative;
+      background: linear-gradient(145deg, #ffffff, #fafafa);
+    }
+
+    .tool-card:hover {
+      border-color: #990019;
+      background: #ffffff;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(153, 0, 25, 0.06);
+    }
+
+    /* 每个工具卡片前的装饰小点 */
+    .tool-card::before {
+      content: "◆";
+      color: #4DE633;
+      font-size: 0.7rem;
+      margin-bottom: 5px;
+      opacity: 0.6;
+      letter-spacing: 2px;
+      display: block;
+    }
+
+    .tool-card .tool-emoji {
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+      opacity: 0.7;
+    }
+
+    .tool-card .tool-name {
+      font-weight: 520;
+      color: #1a1a1a;
+      letter-spacing: 0.2px;
+    }
+
+    /* 空链接占位样式 (后期可加) */
+    .tool-card[href="#"] {
+      cursor: default;
+      opacity: 0.85;
+    }
+
+    .tool-card[href="#"]:hover {
+      transform: translateY(-2px);
+      border-color: #4DE633;
+    }
+
+    /* 底部小字 */
+    .footer-note {
+      margin-top: 2.5rem;
+      font-size: 0.8rem;
+      color: #888;
+      text-align: center;
+      border-top: 1px solid #efefef;
+      padding-top: 1.8rem;
+      letter-spacing: 0.4px;
+    }
+
+    .footer-note a {
+      color: #990019;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-note a:hover {
+      text-decoration: underline;
+    }
+
+    /* 自定义字体图标 (纯文本模拟) 也可用emoji */
+    .icon-placeholder {
+      display: inline-block;
+      width: 1.4rem;
+      text-align: center;
+    }
+
+    /* 手机窄屏优化 */
+    @media (max-width: 480px) {
+      body { padding: 1rem 0.8rem; }
+      .card { padding: 1.2rem 0.9rem; border-radius: 24px; }
+      .profile-card { padding: 1.5rem 0.5rem; }
+      .avatar { width: 100px; height: 100px; }
+      .name { font-size: 1.6rem; }
+      .bio { font-size: 1rem; }
+      .social-link { font-size: 0.85rem; padding: 0.3rem 0.8rem; }
+      .tool-grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
+      .tool-card { min-height: 70px; padding: 0.8rem 0.3rem; }
+    }
+
+    @media (max-width: 380px) {
+      .tool-grid { grid-template-columns: 1fr 1fr; }
+      .social-links { gap: 0.5rem; }
+    }
+
+    /* 辅助隐藏 */
+    .sr-only {
+      position: absolute; 
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+    }
+
+    /* 按主题强调色点缀 */
+    .theme-dot {
+      background: #990019;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 4px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 个人资料卡片 -->
+  <div class="card profile-card">
+    <img class="avatar" src="https://avatars.githubusercontent.com/u/82360978" alt="改善客的头像" loading="lazy" onerror="this.style.opacity='0.6'; this.alt='头像加载失败';">
+    <div class="name">改善客 · 精益生产</div>
+    <div class="bio">⚙️ 精益生产实践者 · 精益数字探索者</div>
+    
+    <!-- 社交链接 -->
+    <div class="social-links">
+      <a href="https://github.com/gaishanke" target="_blank" rel="noopener noreferrer" class="social-link">
+        <span class="icon-placeholder">🐙</span> GitHub
+      </a>
+      <a href="https://www.douyin.com/user/MS4wLjABAAAAS1wwOvaUh9d5-0GJHgclC3kRt0hdiJ0w3lbJu4BjpW96VuQyoltyDTYQZ7wxjOgQ" target="_blank" rel="noopener noreferrer" class="social-link">
+        <span class="icon-placeholder">🎵</span> 抖音
+      </a>
+      <a href="https://www.xiaohongshu.com/user/profile/65b53862000000000e02559f" target="_blank" rel="noopener noreferrer" class="social-link">
+        <span class="icon-placeholder">📕</span> 小红书
+      </a>
+    </div>
+  </div>
+
+  <!-- 工具导航卡片 (空链接占位) -->
+  <div class="card tools-section">
+    <h2>
+      <span class="theme-dot"></span> 精益工具箱
+      <span style="font-weight:400; font-size:0.9rem; color:#888; margin-left:0.2rem;"> · 即将上线</span>
+    </h2>
+    <div class="tool-grid">
+      <!-- 每个工具卡片都是空链接 # -->
+      <a href="#" class="tool-card" aria-label="价值流图 (空链接)">
+        <span class="tool-emoji">📊</span>
+        <span class="tool-name">价值流图</span>
+      </a>
+      <a href="#" class="tool-card" aria-label="看板 (空链接)">
+        <span class="tool-emoji">📋</span>
+        <span class="tool-name">看板</span>
+      </a>
+      <a href="#" class="tool-card" aria-label="A3报告 (空链接)">
+        <span class="tool-emoji">📄</span>
+        <span class="tool-name">A3报告</span>
+      </a>
+      <a href="#" class="tool-card" aria-label="OEE计算 (空链接)">
+        <span class="tool-emoji">⚙️</span>
+        <span class="tool-name">OEE计算</span>
+      </a>
+      <a href="#" class="tool-card" aria-label="5S检查表 (空链接)">
+        <span class="tool-emoji">✅</span>
+        <span class="tool-name">5S检查表</span>
+      </a>
+      <a href="#" class="tool-card" aria-label="现场管理 (空链接)">
+        <span class="tool-emoji">🏭</span>
+        <span class="tool-name">现场管理</span>
+      </a>
+      <a href="#" class="tool-card" aria-label="PDCA循环 (空链接)">
+        <span class="tool-emoji">🔄</span>
+        <span class="tool-name">PDCA循环</span>
+      </a>
+      <a href="#" class="tool-card" aria-label="标准作业 (空链接)">
+        <span class="tool-emoji">📐</span>
+        <span class="tool-name">标准作业</span>
+      </a>
+    </div>
+    <p style="font-size:0.75rem; color:#aaa; margin-top:1rem; text-align:right; border-top:1px dashed #eee; padding-top:0.8rem;">
+      <span style="background:#f3f3f3; padding:0.1rem 0.8rem; border-radius:30px;">⚡ 点击卡片 · 即将开放</span>
+    </p>
+  </div>
+
+  <!-- 底部信息 -->
+  <div class="footer-note">
+    <span style="color:#990019; font-weight:500;">改善客</span> · 精益生产<br>
+    <span style="opacity:0.6;">© 2026 以人为本 · 持续改善</span>
+  </div>
+
+</div>
+<!-- 容器结束 -->
+</body>
+</html>
