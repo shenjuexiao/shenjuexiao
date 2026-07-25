@@ -2,10 +2,11 @@
 #!/bin/bash
 
 # 进入项目目录
-# cd vitepress-shenjuexiao
+# cd shenjuexiao
 
 # GITEE
-git remote set-url --add origin git@gitee.com:shenjuexiao/vitepress-shenjuexiao.git
+git remote set-url --delete origin git@gitee.com:shenjuexiao/shenjuexiao.git
+git remote set-url --add origin git@gitee.com:shenjuexiao/shenjuexiao.git
 
 # 暂存所有更改
 git add .

@@ -97,7 +97,7 @@ jobs:
           # 部署分支（默认 gh-pages）
           publish_branch: gh-pages
           # 部署文件夹（构建产物目录 Astro / VitePress 默认输出 dist）
-          publish_dir: .vitepress/dist
+          publish_dir: docs/.vitepress/dist
           # 保留历史提交记录（可选）
           keep_files: false
           # 部署强制推送

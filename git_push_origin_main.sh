@@ -5,6 +5,7 @@
 # cd shenjuexiao
 
 # GITEE
+git remote set-url --delete origin git@gitee.com:shenjuexiao/shenjuexiao.git
 git remote set-url --add origin git@gitee.com:shenjuexiao/shenjuexiao.git
 
 # 暂存所有更改
