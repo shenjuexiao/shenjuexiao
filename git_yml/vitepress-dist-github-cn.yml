@@ -1,0 +1,114 @@
+# vitepress-dist-github-cn.yml
+# github.com/shenjuexiao
+# 2026-07-24
+
+# vitepress.dev/zh/guide/deploy
+# 部署 VitePress 站点
+
+# GitHub Pages
+
+# 构建 VitePress 站点并将其部署到 GitHub Pages 的示例工作流程
+#
+name: Deploy VitePress site to Pages
+
+on:
+  # 在针对 main 分支的推送上运行。如果你
+  # 使用 maste 分支作为默认分支，请将其更改为 master
+  push:
+    branches: [main]
+
+  # 允许你从 Actions 选项卡手动运行此工作流程
+  workflow_dispatch:
+
+# 设置 GITHUB_TOKEN 的权限，以允许部署到 GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 只允许同时进行一次部署，跳过正在运行和最新队列之间的运行队列
+# 但是，不要取消正在进行的运行，因为我们希望允许这些生产部署完成
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+
+jobs:
+  # 构建工作 + 部署工作 
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          # 如果未启用 lastUpdated，则不需要
+          fetch-depth: 0
+      # 如果使用 pnpm，请取消此区域注释
+      # - uses: pnpm/action-setup@v4 
+      #   with:
+      # Not needed if you've set "packageManager" in package.json
+      #     version: 9
+      # 如果使用 Bun，请取消注释
+      # - uses: oven-sh/setup-bun@v1
+      
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          # npm / pnpm / yarn
+          cache: npm
+
+      - name: Cache VitePress
+        uses: actions/cache@v4
+        with:
+          path: docs/.vitepress/cache
+          key: ${{ runner.os }}-vitepress-${{ hashFiles('docs/**', 'package-lock.json', 'pnpm-lock.yaml', 'yarn.lock', 'bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-vitepress-
+      
+      # 部署到外部仓库不需要
+      # - name: Setup Pages
+      #   uses: actions/configure-pages@v4
+      
+      - name: Install dependencies
+        # npm ci / pnpm install / yarn install / bun install
+        run: npm ci
+        
+      - name: Build with VitePress
+        # npm run docs:build / pnpm docs:build / yarn docs:build / bun run docs:build
+        run: npm run docs:build
+      
+      # 部署到外部仓库不需要
+      # - name: Upload artifact
+      #   uses: actions/upload-pages-artifact@v3
+      #   with:
+      #     path: docs/.vitepress/dist
+      
+      # 部署到外部仓库
+      - name: Deploy to target repository
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          # GitHub 自动注入 GITHUB_TOKEN
+          # github_token: ${{ secrets.GITHUB_TOKEN }}
+          # 源仓库 Secrets 设置 PERSONAL_TOKEN
+          personal_token: ${{ secrets.VITEPRESS_DIST }}
+          # 部署仓库（用户名/仓库）
+          external_repository: shenjuexiao/vitepress-dist
+          # 部署分支（默认 gh-pages）
+          publish_branch: gh-pages
+          # 部署文件夹（构建产物目录 Astro / VitePress 默认输出 dist）
+          publish_dir: .vitepress/dist
+          # 保留历史提交记录（可选）
+          keep_files: false
+          # 部署强制推送
+          force_orphan: false
+          # 提交信息（可选）
+          commit_message: "Deploy VitePress site - ${{ github.sha }}"
+          # 允许外部用户提交（可选，公共仓库建议设为 true）
+          allow_empty_commit: false
+          # 自定义域名（可选，如果你的站点使用自定义域名）
+          # cname: www.example.com
+          # 用户信息
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"
+          

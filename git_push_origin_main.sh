@@ -1,8 +1,11 @@
-# 20260710
+# 20260723
 #!/bin/bash
 
 # 进入项目目录
 # cd shenjuexiao
+
+# GITEE
+git remote set-url --add origin git@gitee.com:shenjuexiao/shenjuexiao.git
 
 # 暂存所有更改
 git add .

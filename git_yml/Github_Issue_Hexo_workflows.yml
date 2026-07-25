@@ -1,4 +1,7 @@
+# Github_Issue_Hexo_workflows.yml
+# github.com/shenjuexiao
 # 20260710
+
 # https://github.com/flytam/blog/issues/27
 # issue 新增或者修改时触发工作流
 # 拉取 hexo 源文件
