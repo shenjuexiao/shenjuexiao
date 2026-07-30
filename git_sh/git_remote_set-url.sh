@@ -1,5 +1,6 @@
-# 20260710
+# git_remote_set-url.sh
 # github.com/shenjuexiao
+# 20260726
 
 #!/bin/bash
 

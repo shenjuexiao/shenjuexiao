@@ -1,5 +1,6 @@
-# 20260725
+# git_checkout_main.sh
 # github.com/shenjuexiao
+# 20260726
 
 #!/bin/bash
 
