@@ -23,7 +23,7 @@ Here are some ideas to get you started:
 
 <!--
 ## 🛠️ Lean production skills
-->
+-->
 
 ## 🚀 Simple project
 
@@ -34,5 +34,3 @@ Here are some ideas to get you started:
 - [婴幼儿配方乳粉产品配方注册打分](https://github.com/shenchutang/infant-formula-cn)
 
 👶 婴幼儿配方乳粉产品配方注册信息对比国标，使用预定方案，模拟打分，仅供娱乐。
-
-
