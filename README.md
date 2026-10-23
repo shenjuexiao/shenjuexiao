@@ -27,7 +27,7 @@ Here are some ideas to get you started:
 
 ## 🚀 Simple project
 
-- [Bing 每日壁纸 - UHD](https://github.com/bingmen/bing-UHD) [✅](https://udh.bingmen.com)
+- [Bing 每日壁纸 - UHD](https://github.com/bingmen/bing-UHD) [✅](https://uhd.bingmen.com)
 👀 抓取 Bing 每日壁纸（九个地区）数据，存储 JSON、UHD 和缩略图，汇总表格。
 
 - [婴幼儿配方乳粉产品配方注册打分](https://github.com/shenchutang/infant-formula-cn)  [✅](https://infant.shenchutang.com)
