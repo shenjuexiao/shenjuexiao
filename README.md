@@ -29,10 +29,10 @@ Here are some ideas to get you started:
 
 ### 🐎 2026
 
-- [Bing 每日壁纸 - UHD 中文](https://github.com/bingmen/bing-UHD-cn) [❌](https://uhdcn.bingmen.com)
+- [Bing 每日壁纸 - UHD 中文](https://github.com/binguhd/bing-UHD-cn)[✅](https://cn.binguhd.com)
 👀 自动抓取 Bing 每日壁纸（中国地区），存储 UHD 和 320×240 格式，后者作为略缩图形成归档汇总表格。
 
-- [Bing 每日壁纸 - UHD](https://github.com/bingmen/bing-UHD) [✅](https://uhd.bingmen.com)
+- [Bing 每日壁纸 - UHD](https://github.com/binguhd/bing-UHD) [✅](https://binguhd.com)
 👀 抓取 Bing 每日壁纸（九个地区）数据，存储 JSON、UHD 和缩略图，汇总表格。
 
 - [婴幼儿配方乳粉产品配方注册打分](https://github.com/shenchutang/infant-formula-cn)  [✅](https://infant.shenchutang.com)
